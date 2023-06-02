@@ -9,7 +9,7 @@ This is a web application that visualizes belly button biodiversity data using i
 - [Usage](#usage)
 - [Deployment](#deployment)
 - [Contact](#contact)
-- [Acknowledegments](#acknowledgements)
+- [Acknowledgements](#acknowledgements)
 
 ## Technologies
 
@@ -52,7 +52,7 @@ Once deployed, the web application will be accessible via the deployment URL.
 
 If you have any questions or feedback about this script, please feel free to contact me at param.birdi@utoronto.ca.
 
-## Acknowledegments
+## Acknowledgements
 
 This code was written by Paramdeep Singh Birdi as part of a project for a data analysis course.
 
