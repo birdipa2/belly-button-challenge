@@ -1,8 +1,5 @@
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
-let d3Output = d3.json(url);
-console.log(d3Output)
-
 // Function to create the bar chart
 function createBarChart(dataObj) {
   // Get the top 10 OTUs
@@ -67,52 +64,49 @@ function createBubbleChart(dataObj) {
 
 // Function to create the gauge chart
 function createGaugeChart(wfreq) {
-    // Create the trace
-    const trace = {
-      domain: { x: [0, 1], y: [0, 1] },
-      value: wfreq,
-      title: { text: "Belly Button Washing Frequency" },
-      type: "indicator",
-      mode: "gauge+number",
-      gauge: {
-        axis: { range: [0, 9] },
-        steps: [
-          { range: [0, 1], color: 'rgba(255, 241, 156, .5)' },
-          { range: [1, 2], color: "rgba(242, 239, 139, .5)" },
-          { range: [2, 3], color: "rgba(221, 237, 122, .5)" },
-          { range: [3, 4], color: "rgba(199, 236, 105, .5)" },
-          { range: [4, 5], color: "rgba(178, 235, 89, .5)" },
-          { range: [5, 6], color: "rgba(137, 208, 66, .5)" },
-          { range: [6, 7], color: "rgba(96, 181, 44, .5)" },
-          { range: [7, 8], color: "rgba(55, 154, 22, .5)" },
-          { range: [8, 9], color: 'rgba(14, 127, 0, .5)' }
-        ],
-        threshold: {
-          line: { color: "red", width: 4 },
-          thickness: 0.75,
-          value: wfreq,
-          shape: "angular"
-        },
-        bar: { color: "black" }
-      }
-    };
-  
-    // Create the data array
-    const traceData = [trace];
-  
-    // Define the layout
-    const layout = {
-      width: 500,
-      height: 400,
-      margin: { t: 0, b: 0 }
-    };
-  
-    // Plot the chart
-    Plotly.newPlot("gauge", traceData, layout);
-  }
-  
-  
-  
+  // Create the trace
+  const trace = {
+    domain: { x: [0, 1], y: [0, 1] },
+    value: wfreq,
+    title: { text: "Belly Button Washing Frequency" },
+    type: "indicator",
+    mode: "gauge+number",
+    gauge: {
+      axis: { range: [0, 9] },
+      steps: [
+        { range: [0, 1], color: 'rgba(255, 241, 156, .5)' },
+        { range: [1, 2], color: "rgba(242, 239, 139, .5)" },
+        { range: [2, 3], color: "rgba(221, 237, 122, .5)" },
+        { range: [3, 4], color: "rgba(199, 236, 105, .5)" },
+        { range: [4, 5], color: "rgba(178, 235, 89, .5)" },
+        { range: [5, 6], color: "rgba(137, 208, 66, .5)" },
+        { range: [6, 7], color: "rgba(96, 181, 44, .5)" },
+        { range: [7, 8], color: "rgba(55, 154, 22, .5)" },
+        { range: [8, 9], color: 'rgba(14, 127, 0, .5)' }
+      ],
+      threshold: {
+        line: { color: "red", width: 4 },
+        thickness: 0.75,
+        value: wfreq,
+        shape: "angular"
+      },
+      bar: { color: "black" }
+    }
+  };
+
+  // Create the data array
+  const traceData = [trace];
+
+  // Define the layout
+  const layout = {
+    width: 500,
+    height: 400,
+    margin: { t: 0, b: 0 }
+  };
+
+  // Plot the chart
+  Plotly.newPlot("gauge", traceData, layout);
+}
 
 // Function to update the chart and metadata based on the selected dropdown value
 function optionChanged(selectedValue) {
@@ -122,10 +116,25 @@ function optionChanged(selectedValue) {
     const selectedSample = jsonData.samples.find(sample => sample.id === selectedValue);
     const selectedMetadata = jsonData.metadata.find(metadata => metadata.id.toString() === selectedValue);
 
-    // Create the charts
+    // Update the charts
     createBarChart(selectedSample);
     createBubbleChart(selectedSample);
     createGaugeChart(selectedMetadata.wfreq);
+
+    // Update the metadata
+    updateMetadata(selectedMetadata);
+  });
+}
+
+// Function to update the metadata
+function updateMetadata(metadataObj) {
+  // Clear existing metadata
+  const metadataDiv = d3.select("#sample-metadata");
+  metadataDiv.html("");
+
+  // Add new metadata
+  Object.entries(metadataObj).forEach(([key, value]) => {
+    metadataDiv.append("p").text(`${key}: ${value}`);
   });
 }
 
@@ -153,12 +162,7 @@ function init() {
     createBarChart(firstSample);
     createBubbleChart(firstSample);
     createGaugeChart(firstMetadata.wfreq);
-
-    // Display the initial sample metadata
-    const metadataDiv = d3.select("#sample-metadata");
-    Object.entries(firstMetadata).forEach(([key, value]) => {
-      metadataDiv.append("p").text(`${key}: ${value}`);
-    });
+    updateMetadata(firstMetadata);
   });
 }
 
