@@ -8,8 +8,8 @@ This is a web application that visualizes belly button biodiversity data using i
 - [Features](#features)
 - [Usage](#usage)
 - [Deployment](#deployment)
-- [Author](#author)
-- [License](#license)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
 ## Technologies
 
@@ -48,6 +48,12 @@ The Bellybutton Biodiversity Dashboard can be deployed to a hosting service such
 
 Once deployed, the web application will be accessible via the deployment URL.
 
-## Author
+## Contact
 
-Paramdeep Singh Birdi
+If you have any questions or feedback about this script, please feel free to contact me at param.birdi@utoronto.ca.
+
+## Acknowledgments
+
+This code was written by Paramdeep Singh Birdi as part of a project for a data analysis course.
+
+Most of the data used in this project was provided by the course instructors.
